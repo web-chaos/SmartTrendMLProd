@@ -1,1 +1,1 @@
-# SmartTrendMLProd
+# binance-telegram-bot

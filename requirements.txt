@@ -1,0 +1,14 @@
+requests
+yfinance
+python-binance
+pyTelegramBotAPI
+websockets
+ta
+pandas
+numpy
+sqlalchemy
+aiosqlite
+lightgbm
+scikit-learn
+matplotlib
+joblib

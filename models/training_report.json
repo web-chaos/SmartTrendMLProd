@@ -1,0 +1,791 @@
+{
+  "db": "ml_trading.db",
+  "table": "ml_trading_data",
+  "rows_total": 881,
+  "train_shape": [
+    704,
+    83
+  ],
+  "val_shape": [
+    177,
+    83
+  ],
+  "num_classes": 4,
+  "accuracy": 0.4124293785310734,
+  "balanced_accuracy": 0.4112555399798932,
+  "f1_macro": 0.402393348411784,
+  "classification_report": "              precision    recall  f1-score   support\n\n           0     0.4231    0.5789    0.4889        38\n           1     0.3590    0.3111    0.3333        45\n           2     0.2895    0.3143    0.3014        35\n           3     0.5417    0.4407    0.4860        59\n\n    accuracy                         0.4124       177\n   macro avg     0.4033    0.4113    0.4024       177\nweighted avg     0.4199    0.4124    0.4113       177\n",
+  "confusion_matrix": [
+    [
+      22,
+      9,
+      5,
+      2
+    ],
+    [
+      12,
+      14,
+      8,
+      11
+    ],
+    [
+      8,
+      7,
+      11,
+      9
+    ],
+    [
+      10,
+      9,
+      14,
+      26
+    ]
+  ],
+  "feature_importances": {
+    "trix_htf": 18.0,
+    "trix_momentum_ltf": 18.0,
+    "cdv_ltf_value": 11.0,
+    "adx_htf_value": 11.0,
+    "stoch_prev_htf": 11.0,
+    "prev_trix_htf": 11.0,
+    "volume_delta": 10.0,
+    "rsi_prev_ltf": 10.0,
+    "macd_htf_momentum": 9.0,
+    "volume_normalized_body": 9.0,
+    "atr_ltf_value": 9.0,
+    "macd_momentum": 8.0,
+    "trix_momentum_htf": 8.0,
+    "stoch_htf": 7.0,
+    "final_scores": 7.0,
+    "adx_ltf_value": 6.0,
+    "volume_mean": 6.0,
+    "rsi_prev_htf": 6.0,
+    "volume_value": 5.0,
+    "volume_mean_long": 5.0,
+    "stoch_prev_ltf": 5.0,
+    "macd_prev_htf_diff": 5.0,
+    "ema_fast": 5.0,
+    "potential_value": 4.0,
+    "rsi_htf": 4.0,
+    "stoch_ltf": 4.0,
+    "macd_prev_diff": 4.0,
+    "prev_trix_ltf": 4.0,
+    "macd_1h_long_score": 4.0,
+    "rsi_ltf": 3.0,
+    "stoch_delta_ltf": 3.0,
+    "rsi_delta_ltf": 3.0,
+    "ema_diff_ltf": 3.0,
+    "trix_long_passed": 3.0,
+    "rsi_1h_long_score": 3.0,
+    "trix_ltf": 2.0,
+    "macd_htf_diff": 2.0,
+    "stoch_delta_htf": 2.0,
+    "rsi_delta_htf": 2.0,
+    "ema_diff_htf": 2.0,
+    "macd_current_diff": 1.0,
+    "adx_htf_passed": 1.0,
+    "cdv_ltf_passed": 1.0,
+    "div_long_passed": 1.0,
+    "oi_value": 0.0,
+    "cdv_htf_value": 0.0,
+    "ema_slow": 0.0,
+    "atr_ltf_passed": 0.0,
+    "adx_ltf_passed": 0.0,
+    "supertrend_ltf_passed": 0.0,
+    "supertrend_htf_passed": 0.0,
+    "cdv_htf_passed": 0.0,
+    "potential_passed": 0.0,
+    "market_structure_ltf_passed": 0.0,
+    "market_structure_htf_passed": 0.0,
+    "candle_pattern_passed": 0.0,
+    "candle_pattern_sd_bonus_passed": 0.0,
+    "structural_passed": 0.0,
+    "macd_early_bullish": 0.0,
+    "macd_early_bearish": 0.0,
+    "macd_long": 0.0,
+    "macd_short": 0.0,
+    "volume_passed": 0.0,
+    "early_trix_bullish": 0.0,
+    "early_trix_bearish": 0.0,
+    "trix_classic_long": 0.0,
+    "trix_classic_short": 0.0,
+    "trix_short_passed": 0.0,
+    "stoch_long_passed": 0.0,
+    "stoch_short_passed": 0.0,
+    "rsi_long_passed": 0.0,
+    "rsi_short_passed": 0.0,
+    "ema_long_passed": 0.0,
+    "ema_short_passed": 0.0,
+    "div_short_passed": 0.0,
+    "div_long_total_score": 0.0,
+    "div_short_total_score": 0.0,
+    "rsi_1h_short_score": 0.0,
+    "rsi_4h_long_score": 0.0,
+    "rsi_4h_short_score": 0.0,
+    "macd_1h_short_score": 0.0,
+    "macd_4h_long_score": 0.0,
+    "macd_4h_short_score": 0.0
+  },
+  "top_symbols_tp3_plus": [
+    [
+      "ETHUSDT",
+      8
+    ],
+    [
+      "LDOUSDT",
+      6
+    ],
+    [
+      "APTUSDT",
+      6
+    ],
+    [
+      "CAKEUSDT",
+      6
+    ],
+    [
+      "FARTCOINUSDT",
+      5
+    ],
+    [
+      "CRVUSDT",
+      5
+    ],
+    [
+      "SPXUSDT",
+      5
+    ],
+    [
+      "BTCUSDT",
+      5
+    ],
+    [
+      "MORPHOUSDT",
+      5
+    ],
+    [
+      "RAYSOLUSDT",
+      5
+    ],
+    [
+      "IOTAUSDT",
+      5
+    ],
+    [
+      "ETHFIUSDT",
+      5
+    ],
+    [
+      "LTCUSDT",
+      4
+    ],
+    [
+      "DOGEUSDT",
+      4
+    ],
+    [
+      "KERNELUSDT",
+      4
+    ],
+    [
+      "EIGENUSDT",
+      4
+    ],
+    [
+      "PUMPUSDT",
+      4
+    ],
+    [
+      "TRBUSDT",
+      4
+    ],
+    [
+      "ARCUSDT",
+      4
+    ],
+    [
+      "STXUSDT",
+      4
+    ],
+    [
+      "USELESSUSDT",
+      4
+    ],
+    [
+      "KASUSDT",
+      4
+    ],
+    [
+      "PENDLEUSDT",
+      4
+    ],
+    [
+      "SUSDT",
+      3
+    ],
+    [
+      "POPCATUSDT",
+      3
+    ],
+    [
+      "ADAUSDT",
+      3
+    ],
+    [
+      "MOODENGUSDT",
+      3
+    ],
+    [
+      "XRPUSDT",
+      3
+    ],
+    [
+      "NEARUSDT",
+      3
+    ],
+    [
+      "SNXUSDT",
+      3
+    ],
+    [
+      "1INCHUSDT",
+      3
+    ],
+    [
+      "ALGOUSDT",
+      3
+    ],
+    [
+      "AAVEUSDT",
+      3
+    ],
+    [
+      "AI16ZUSDT",
+      3
+    ],
+    [
+      "NEIROUSDT",
+      3
+    ],
+    [
+      "GUNUSDT",
+      3
+    ],
+    [
+      "GRTUSDT",
+      3
+    ],
+    [
+      "DEGENUSDT",
+      3
+    ],
+    [
+      "OPUSDT",
+      3
+    ],
+    [
+      "PENGUUSDT",
+      3
+    ],
+    [
+      "POLUSDT",
+      3
+    ],
+    [
+      "DOTUSDT",
+      3
+    ],
+    [
+      "BANDUSDT",
+      3
+    ],
+    [
+      "TAOUSDT",
+      3
+    ],
+    [
+      "JTOUSDT",
+      3
+    ],
+    [
+      "VIRTUALUSDT",
+      3
+    ],
+    [
+      "RENDERUSDT",
+      3
+    ],
+    [
+      "SEIUSDT",
+      3
+    ],
+    [
+      "UNIUSDT",
+      3
+    ],
+    [
+      "BIOUSDT",
+      3
+    ],
+    [
+      "ZROUSDT",
+      3
+    ],
+    [
+      "ENAUSDT",
+      3
+    ],
+    [
+      "INJUSDT",
+      3
+    ],
+    [
+      "XPLUSDT",
+      3
+    ],
+    [
+      "MOCAUSDT",
+      2
+    ],
+    [
+      "KAITOUSDT",
+      2
+    ],
+    [
+      "ETCUSDT",
+      2
+    ],
+    [
+      "TONUSDT",
+      2
+    ],
+    [
+      "PEOPLEUSDT",
+      2
+    ],
+    [
+      "WIFUSDT",
+      2
+    ],
+    [
+      "SUIUSDT",
+      2
+    ],
+    [
+      "AVAXUSDT",
+      2
+    ],
+    [
+      "HAEDALUSDT",
+      2
+    ],
+    [
+      "GHSTUSDT",
+      2
+    ],
+    [
+      "JUPUSDT",
+      2
+    ],
+    [
+      "GRIFFAINUSDT",
+      2
+    ],
+    [
+      "XMRUSDT",
+      2
+    ],
+    [
+      "ENSUSDT",
+      2
+    ],
+    [
+      "SOLUSDT",
+      2
+    ],
+    [
+      "CHILLGUYUSDT",
+      2
+    ],
+    [
+      "MANTAUSDT",
+      2
+    ],
+    [
+      "METISUSDT",
+      2
+    ],
+    [
+      "PNUTUSDT",
+      2
+    ],
+    [
+      "1000PEPEUSDT",
+      2
+    ],
+    [
+      "GASUSDT",
+      2
+    ],
+    [
+      "HUMAUSDT",
+      2
+    ],
+    [
+      "ICPUSDT",
+      2
+    ],
+    [
+      "AVAAIUSDT",
+      2
+    ],
+    [
+      "REZUSDT",
+      2
+    ],
+    [
+      "SKLUSDT",
+      2
+    ],
+    [
+      "AXLUSDT",
+      2
+    ],
+    [
+      "PLUMEUSDT",
+      2
+    ],
+    [
+      "XANUSDT",
+      2
+    ],
+    [
+      "USUALUSDT",
+      2
+    ],
+    [
+      "AEVOUSDT",
+      2
+    ],
+    [
+      "GMXUSDT",
+      2
+    ],
+    [
+      "ALTUSDT",
+      2
+    ],
+    [
+      "KAIAUSDT",
+      2
+    ],
+    [
+      "GMTUSDT",
+      2
+    ]
+  ],
+  "top_symbols_tp3_stable": [
+    [
+      "ETHUSDT",
+      8
+    ],
+    [
+      "LDOUSDT",
+      6
+    ],
+    [
+      "APTUSDT",
+      6
+    ],
+    [
+      "CAKEUSDT",
+      6
+    ],
+    [
+      "FARTCOINUSDT",
+      5
+    ],
+    [
+      "CRVUSDT",
+      5
+    ],
+    [
+      "SPXUSDT",
+      5
+    ],
+    [
+      "BTCUSDT",
+      5
+    ],
+    [
+      "MORPHOUSDT",
+      5
+    ],
+    [
+      "RAYSOLUSDT",
+      5
+    ],
+    [
+      "IOTAUSDT",
+      5
+    ],
+    [
+      "ETHFIUSDT",
+      5
+    ],
+    [
+      "LTCUSDT",
+      4
+    ],
+    [
+      "DOGEUSDT",
+      4
+    ],
+    [
+      "KERNELUSDT",
+      4
+    ],
+    [
+      "EIGENUSDT",
+      4
+    ],
+    [
+      "PUMPUSDT",
+      4
+    ],
+    [
+      "TRBUSDT",
+      4
+    ],
+    [
+      "ARCUSDT",
+      4
+    ],
+    [
+      "STXUSDT",
+      4
+    ],
+    [
+      "USELESSUSDT",
+      4
+    ],
+    [
+      "KASUSDT",
+      4
+    ],
+    [
+      "PENDLEUSDT",
+      4
+    ],
+    [
+      "SUSDT",
+      3
+    ],
+    [
+      "POPCATUSDT",
+      3
+    ],
+    [
+      "ADAUSDT",
+      3
+    ],
+    [
+      "MOODENGUSDT",
+      3
+    ],
+    [
+      "XRPUSDT",
+      3
+    ],
+    [
+      "NEARUSDT",
+      3
+    ],
+    [
+      "SNXUSDT",
+      3
+    ],
+    [
+      "1INCHUSDT",
+      3
+    ],
+    [
+      "ALGOUSDT",
+      3
+    ],
+    [
+      "AAVEUSDT",
+      3
+    ],
+    [
+      "AI16ZUSDT",
+      3
+    ],
+    [
+      "NEIROUSDT",
+      3
+    ],
+    [
+      "GUNUSDT",
+      3
+    ],
+    [
+      "GRTUSDT",
+      3
+    ],
+    [
+      "DEGENUSDT",
+      3
+    ],
+    [
+      "OPUSDT",
+      3
+    ],
+    [
+      "PENGUUSDT",
+      3
+    ],
+    [
+      "POLUSDT",
+      3
+    ],
+    [
+      "DOTUSDT",
+      3
+    ],
+    [
+      "BANDUSDT",
+      3
+    ],
+    [
+      "TAOUSDT",
+      3
+    ],
+    [
+      "JTOUSDT",
+      3
+    ],
+    [
+      "VIRTUALUSDT",
+      3
+    ],
+    [
+      "RENDERUSDT",
+      3
+    ],
+    [
+      "SEIUSDT",
+      3
+    ],
+    [
+      "UNIUSDT",
+      3
+    ],
+    [
+      "BIOUSDT",
+      3
+    ],
+    [
+      "ZROUSDT",
+      3
+    ],
+    [
+      "ENAUSDT",
+      3
+    ],
+    [
+      "INJUSDT",
+      3
+    ],
+    [
+      "XPLUSDT",
+      3
+    ]
+  ],
+  "model_path": "models/lgbm_v1.pkl",
+  "feature_importance": {
+    "oi_value": 0,
+    "cdv_ltf_value": 11,
+    "cdv_htf_value": 0,
+    "adx_ltf_value": 6,
+    "adx_htf_value": 11,
+    "trix_ltf": 2,
+    "trix_htf": 18,
+    "macd_momentum": 8,
+    "macd_htf_momentum": 9,
+    "macd_current_diff": 1,
+    "volume_value": 5,
+    "volume_delta": 10,
+    "volume_mean": 6,
+    "volume_mean_long": 5,
+    "volume_normalized_body": 9,
+    "potential_value": 4,
+    "atr_ltf_value": 9,
+    "rsi_ltf": 3,
+    "rsi_htf": 4,
+    "rsi_prev_ltf": 10,
+    "rsi_prev_htf": 6,
+    "stoch_ltf": 4,
+    "stoch_htf": 7,
+    "stoch_prev_ltf": 5,
+    "stoch_prev_htf": 11,
+    "macd_htf_diff": 2,
+    "macd_prev_diff": 4,
+    "macd_prev_htf_diff": 5,
+    "prev_trix_ltf": 4,
+    "prev_trix_htf": 11,
+    "trix_momentum_ltf": 18,
+    "trix_momentum_htf": 8,
+    "stoch_delta_ltf": 3,
+    "stoch_delta_htf": 2,
+    "rsi_delta_ltf": 3,
+    "rsi_delta_htf": 2,
+    "ema_diff_ltf": 3,
+    "ema_diff_htf": 2,
+    "ema_fast": 5,
+    "ema_slow": 0,
+    "atr_ltf_passed": 0,
+    "adx_ltf_passed": 0,
+    "adx_htf_passed": 1,
+    "supertrend_ltf_passed": 0,
+    "supertrend_htf_passed": 0,
+    "cdv_ltf_passed": 1,
+    "cdv_htf_passed": 0,
+    "potential_passed": 0,
+    "market_structure_ltf_passed": 0,
+    "market_structure_htf_passed": 0,
+    "candle_pattern_passed": 0,
+    "candle_pattern_sd_bonus_passed": 0,
+    "structural_passed": 0,
+    "macd_early_bullish": 0,
+    "macd_early_bearish": 0,
+    "macd_long": 0,
+    "macd_short": 0,
+    "volume_passed": 0,
+    "early_trix_bullish": 0,
+    "early_trix_bearish": 0,
+    "trix_classic_long": 0,
+    "trix_classic_short": 0,
+    "trix_long_passed": 3,
+    "trix_short_passed": 0,
+    "stoch_long_passed": 0,
+    "stoch_short_passed": 0,
+    "rsi_long_passed": 0,
+    "rsi_short_passed": 0,
+    "ema_long_passed": 0,
+    "ema_short_passed": 0,
+    "div_long_passed": 1,
+    "div_short_passed": 0,
+    "final_scores": 7,
+    "div_long_total_score": 0,
+    "div_short_total_score": 0,
+    "rsi_1h_long_score": 3,
+    "rsi_1h_short_score": 0,
+    "rsi_4h_long_score": 0,
+    "rsi_4h_short_score": 0,
+    "macd_1h_long_score": 4,
+    "macd_1h_short_score": 0,
+    "macd_4h_long_score": 0,
+    "macd_4h_short_score": 0
+  }
+}

@@ -1,0 +1,49 @@
+тейки 3+
+FARTCOINUSDT
+ETHUSDT
+AVAXUSDT
+ARBUSDT
+SOLUSDT
+LDOUSDT
+MORPHOUSDT
+POPCATUSDT
+STXUSDT
+ADAUSDT
+INJUSDT
+MOODENGUSDT
+ETCUSDT
+LTCUSDT
+POLUSDT
+DOGEUSDT
+LPTUSDT
+PUMPUSDT
+ICPUSDT
+XRPUSDT
+DOTUSDT
+APTUSDT
+XLMUSDT
+CRVUSDT
+SPXUSDT
+CAKEUSDT
+NEARUSDT
+BTCUSDT
+KMNOUSDT
+KERNELUSDT
+
+
+python train_ml_binary.py --min-samples 50 --min-pos 10
+python visualize_importance.py
+
+
+python visualize_importance.py --report models/training_report_binary.json
+python visualize_importance.py --report models/training_report_multiclass.json
+
+python visualize_importance.py --report models/training_report.json
+python visualize_importance-mc.py 
+
+
+новыя поля для бд
+"stoch_prev_ltf", "stoch_prev_htf", "stoch_delta_ltf", "stoch_delta_htf", 
+
+
+"rsi_prev_ltf", "rsi_prev_htf", "rsi_delta_ltf", "rsi_delta_htf", 
