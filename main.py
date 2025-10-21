@@ -30,9 +30,6 @@ from websockets.exceptions import ConnectionClosed
 import traceback
 import uuid
 
-from trade.binance_trader import BinanceTrader
-from trade.trade_manager import TradeManager
-
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -354,7 +351,7 @@ CONFIG = {
         "CHILLGUYUSDT", "POPCATUSDT", "BIOUSDT", "PUMPUSDT", "ENSUSDT", "IPUSDT", "POLUSDT", "KASUSDT", "GMTUSDT", "ARKMUSDT", "ALTUSDT",
 
         # === Прочие (низкая ликвидность/неопределённые) ===
-        "KERNELUSDT", "ARCUSDT", "GRIFFAINUSDT", "GASUSDT", "SKLUSDT", "BANDUSDT", "KAVAUSDT", "HAEDALUSDT", "KAITOUSDT", "CFXUSDT", "USELESSUSDT", "STXUSDT", "ZEREBROUSDT", "COAIUSDT"
+        "KERNELUSDT", "ARCUSDT", "GRIFFAINUSDT", "GASUSDT", "SKLUSDT", "BANDUSDT", "KAVAUSDT", "HAEDALUSDT", "KAITOUSDT", "CFXUSDT", "USELESSUSDT", "STXUSDT", "ZEREBROUSDT", "COAIUSDT", "ASTERUSDT"
     ]
 
 }
@@ -404,33 +401,47 @@ pinned_stats_message_id = None  # ID закреплённого сообщени
 client = Client(BINANCE_API_KEY, BINANCE_API_SECRET)
 bot = telebot.TeleBot(TG_BOT_TOKEN)
 
-# 1. Создаем BinanceTrader
-trader = BinanceTrader(
-    client=client,
-    config=CONFIG,
-    daily_stats=daily_stats
-)
 
-# 2. Теперь создаем TradeManager с готовым trader
-trade_manager = TradeManager(
-    client=client,
-    config=CONFIG,
-    binance_trader=trader,  # ✅ Теперь trader определен
-    daily_stats=daily_stats
-)
+def update_profit_loss_from_trade(symbol, trade, outcome: str, target_idx: Optional[int] = None):
+    """
+    outcome: 'win' если тейк достигнут, 'loss' если стоп.
+    Если outcome == 'win' — берём target{target_idx}.
+    Если outcome == 'loss' — берём stop.
+    """
+    print(f"[DEBUG] update_profit_loss_from_trade called: {symbol}, outcome={outcome}, target_idx={target_idx}")
 
-def update_profit_loss_from_trade(symbol, trade, outcome: str):
-    """
-    outcome: 'win' если тейки достигнуты, 'loss' если стоп.
-    """
     try:
         entry = trade.get("entry_real", trade.get("entry"))
-        stop = trade.get("stop")
-        last_price = trade.get("exit_price", trade.get("current_price"))
         side = trade.get("side", "long")
-
-        if not entry or not last_price:
+        if not entry:
+            print(f"[WARN] {symbol}: нет entry для расчёта прибыли")
             return
+
+        # Определяем цену выхода
+        if outcome == "win":
+            if target_idx:
+                last_price = trade.get(f"target{target_idx}")
+            else:
+                # ищем максимальный достигнутый тейк
+                last_price = None
+                for i in range(5, 0, -1):
+                    if trade.get(f"take{i}_hit"):
+                        last_price = trade.get(f"target{i}")
+                        break
+                if not last_price:
+                    last_price = trade.get("target1")
+        elif outcome == "loss":
+            last_price = trade.get("stop")
+        else:
+            print(f"[WARN] {symbol}: outcome неизвестен — {outcome}")
+            return
+
+        if not last_price:
+            print(f"[WARN] {symbol}: нет last_price для расчёта ({outcome})")
+            return
+
+        entry = float(entry)
+        last_price = float(last_price)
 
         # Расчёт изменения в %
         if side == "long":
@@ -438,7 +449,6 @@ def update_profit_loss_from_trade(symbol, trade, outcome: str):
         else:
             change_pct = ((entry - last_price) / entry) * 100
 
-        # Применяем к статистике
         if outcome == "win":
             daily_stats["profit_10x"] += change_pct * 10
             daily_stats["profit_20x"] += change_pct * 20
@@ -446,8 +456,11 @@ def update_profit_loss_from_trade(symbol, trade, outcome: str):
             daily_stats["loss_10x"] += abs(change_pct) * 10
             daily_stats["loss_20x"] += abs(change_pct) * 20
 
+        print(f"[INFO] {symbol}: {outcome.upper()} target{target_idx or '?'} → {change_pct:.2f}%")
+
     except Exception as e:
         print(f"[ERROR] update_profit_loss_from_trade({symbol}): {e}")
+
 
 # Глобальный список всех уникальных символов, когда-либо анализировавшихся
 def load_df(
@@ -5042,6 +5055,8 @@ async def market_analysis_loop(send_message, client, config):
                                     except Exception as e:
                                         print(f"[DB ERROR] update TP{i} for {trade['trade_id']} failed: {e}")
 
+                                    update_profit_loss_from_trade(symbol, trade, "win", target_idx=i)
+
                                     if i == 1:
                                         trade["partial_taken"] = True
 
@@ -5072,7 +5087,6 @@ async def market_analysis_loop(send_message, client, config):
                                         + f"\n⏱️ Время в сделке: {minutes_in_trade} мин"
                                     )
                                     daily_stats[f"closed_breakeven_after_tp{i}"] += 1
-                                    update_profit_loss_from_trade(symbol, trade, "win")
                                     active_trades.pop(symbol, None)
                                     retracement_alerts_sent.pop(symbol, None)
                                     break
@@ -5080,7 +5094,7 @@ async def market_analysis_loop(send_message, client, config):
                             # ---- Проверка стопа ----
                             if stop_triggered(side, candle_low, candle_high, trade["stop"]):
                                 daily_stats["stopped_out"] += 1
-                                update_profit_loss_from_trade(symbol, trade, "loss")
+                                update_profit_loss_from_trade(symbol, trade, "loss", target_idx=None)
 
                                 recently_stopped[symbol] = time.time()
                                 stop_price = candle_low if side == "long" else candle_high
@@ -5444,13 +5458,37 @@ async def market_analysis_loop(send_message, client, config):
                             target5, tp5_type = targets[4]
                             msg += f"🏁 Цель 5 ({tp5_type}): <code>{target5}</code>\n"
 
-                        try:
-                            # ml_text = generate_signal_text(filters_results, ml_out)
-                            ml_text = generate_signal_text(filters_results, ml_out, targets, stop, entry_zone_min, entry_zone_max)
+                        ml_text = ""
+                        if ML_CONFIG.get("enabled", True):
+                            try:
+                                ml_text, ema_wait = generate_signal_text(filters_results, ml_out, targets, stop, entry_zone_min, entry_zone_max)
 
-                        except Exception as e:
-                            print(f"[ERROR] ML text generation failed: {e}")
-                            ml_text = "🤖 ML: прогноз недоступен"
+                                if ema_wait:
+                                    ema_fast = ind["ema_fast"]
+                                    ema_slow = ind["ema_slow"]
+                                    atr = ind["atr"]
+                                    
+                                    if ema_fast and atr:
+                                        trend_strength = abs(ema_fast - ema_slow) / ema_slow if ema_slow else 0
+                                        k = 0.5 if trend_strength >= 0.002 else 0.25
+                                        
+                                        entry_zone_min = round(ema_fast - atr * k, decimal_places)
+                                        entry_zone_max = round(ema_fast + atr * k, decimal_places)
+
+                                    stop = calculate_stop(
+                                        entry_zone_min, 
+                                        entry_zone_max, 
+                                        atr, 
+                                        side, 
+                                        symbol, 
+                                        decimal_places, 
+                                        config=config,
+                                        df_dict=df_dict
+                                    )
+
+                            except Exception as e:
+                                print(f"[ERROR] ML text generation failed: {e}")
+                                ml_text = "🤖 ML: прогноз недоступен"
 
                         # Завершаем сообщение
                         msg += (
@@ -5458,9 +5496,10 @@ async def market_analysis_loop(send_message, client, config):
                             f"⏱️ Время сигнала: <b>{signal_time}</b>\n"
                             f"{filters_info}"
                             f"\n"
-                            f"🤖 ML Прогноз:\n"
-                            f"{ml_text}"
                         )
+
+                        if ML_CONFIG.get("enabled", True):
+                            msg += f"🤖 ML Прогноз:\n{ml_text}"
 
 
                         try:

@@ -1,0 +1,531 @@
+{
+  "db": "ml_trading.db",
+  "table": "ml_trading_data",
+  "rows_total": 1149,
+  "train_shape": [
+    1132,
+    94
+  ],
+  "val_shape": [
+    230,
+    94
+  ],
+  "num_classes": 4,
+  "model_name": "optuna_tuned_xgb",
+  "accuracy": 0.508695652173913,
+  "balanced_accuracy": 0.49010113430731683,
+  "f1_macro": 0.4834629241726016,
+  "classification_report": "              precision    recall  f1-score   support\n\n           0     0.5286    0.6727    0.5920        55\n           1     0.5306    0.4262    0.4727        61\n           2     0.4074    0.2558    0.3143        43\n           3     0.5119    0.6056    0.5548        71\n\n    accuracy                         0.5087       230\n   macro avg     0.4946    0.4901    0.4835       230\nweighted avg     0.5013    0.5087    0.4970       230\n",
+  "confusion_matrix": [
+    [
+      37,
+      7,
+      4,
+      7
+    ],
+    [
+      14,
+      26,
+      3,
+      18
+    ],
+    [
+      9,
+      7,
+      11,
+      16
+    ],
+    [
+      10,
+      9,
+      9,
+      43
+    ]
+  ],
+  "feature_importance": {
+    "macd_score_short": 0.03541233390569687,
+    "macd_short": 0.03238297253847122,
+    "ema_long_passed": 0.02830139361321926,
+    "trend_global": 0.024099813774228096,
+    "adx_htf_passed": 0.021951742470264435,
+    "rsi_1h_short_type": 0.02129925973713398,
+    "stoch_prev_ltf": 0.018152693286538124,
+    "rsi_prev_htf": 0.01806558296084404,
+    "adx_ltf_score": 0.01684565469622612,
+    "adx_htf_score": 0.01664840243756771,
+    "stoch_prev_htf": 0.01441069133579731,
+    "macd_1h_short_type": 0.013925040140748024,
+    "trix_momentum_htf": 0.01309184730052948,
+    "rsi_prev_ltf": 0.01238646637648344,
+    "ema_short_score": 0.012251670472323895,
+    "cdv_ltf_score": 0.012242787517607212,
+    "potential_value": 0.01207780372351408,
+    "macd_1h_short_score": 0.011793606914579868,
+    "macd_long": 0.011157266795635223,
+    "macd_1h_long_score": 0.011014114134013653,
+    "rsi_long_score": 0.010956875048577785,
+    "prev_trix_ltf": 0.010498614981770515,
+    "macd_1h_long_type": 0.010477568954229355,
+    "adx_htf_value": 0.010440558195114136,
+    "rsi_long_passed": 0.010355236940085888,
+    "macd_prev_htf_diff": 0.010183789767324924,
+    "trix_momentum_ltf": 0.010178565047681332,
+    "rsi_1h_short_score": 0.01009558979421854,
+    "prev_trix_htf": 0.010047854855656624,
+    "stoch_delta_htf": 0.00985789019614458,
+    "ema_diff_ltf": 0.009857128374278545,
+    "trix_htf": 0.009737120941281319,
+    "rsi_4h_short_type": 0.00964006781578064,
+    "trix_short_passed": 0.009624690748751163,
+    "stoch_long_passed": 0.009618408046662807,
+    "ema_diff_htf": 0.009606746025383472,
+    "rsi_htf": 0.009531582705676556,
+    "rsi_1h_long_type": 0.00952936615794897,
+    "macd_htf_momentum": 0.009512349963188171,
+    "volume_score": 0.009439417161047459,
+    "macd_momentum": 0.009400040842592716,
+    "rsi_4h_long_score": 0.009369906969368458,
+    "macd_4h_long_score": 0.009368928149342537,
+    "stoch_htf": 0.009300917387008667,
+    "rsi_1h_long_score": 0.009269016794860363,
+    "trix_ltf": 0.00923876091837883,
+    "div_short_total_score": 0.009204796515405178,
+    "macd_htf_diff": 0.009146592579782009,
+    "volume_mean": 0.00914629828184843,
+    "rsi_4h_short_score": 0.009132524952292442,
+    "ema_fast": 0.009105248376727104,
+    "cdv_ltf_volume": 0.009099377319216728,
+    "stoch_long_score": 0.009097450412809849,
+    "cdv_htf_value": 0.009028778411448002,
+    "rsi_delta_htf": 0.008905376307666302,
+    "volume_value": 0.00889927614480257,
+    "trix_short_score": 0.008818604052066803,
+    "cdv_ltf_conflict": 0.008777361363172531,
+    "ema_slow": 0.00876256637275219,
+    "trix_long_score": 0.008716042153537273,
+    "adx_ltf_passed": 0.008693012408912182,
+    "volume_normalized_body": 0.008690412156283855,
+    "rsi_delta_ltf": 0.008654802106320858,
+    "rsi_ltf": 0.008646450005471706,
+    "final_scores": 0.008629390969872475,
+    "volume_delta": 0.008629374206066132,
+    "stoch_short_passed": 0.008619096130132675,
+    "stoch_ltf": 0.008615795522928238,
+    "volume_mean_long": 0.00859918911010027,
+    "cdv_ltf_value": 0.008469159714877605,
+    "adx_ltf_value": 0.008442653343081474,
+    "atr_ltf_value": 0.008392859250307083,
+    "cdv_htf_normalized": 0.008382001891732216,
+    "macd_prev_diff": 0.008337006904184818,
+    "structural_passed": 0.008316651917994022,
+    "div_long_total_score": 0.008298121392726898,
+    "cdv_ltf_normalized": 0.008293140679597855,
+    "macd_current_diff": 0.008225338533520699,
+    "cdv_htf_volume": 0.008222516626119614,
+    "stoch_delta_ltf": 0.00813616719096899,
+    "structural_score": 0.008046505972743034,
+    "div_short_passed": 0.00803321786224842,
+    "cdv_ltf_passed": 0.008027763105928898,
+    "trix_long_passed": 0.007620254065841436,
+    "macd_4h_long_type": 0.007600083947181702,
+    "div_long_passed": 0.007546859327703714,
+    "rsi_short_passed": 0.007385314907878637,
+    "rsi_4h_long_type": 0.007302873767912388,
+    "macd_4h_short_score": 0.007099958602339029,
+    "stoch_short_score": 0.00704790186136961,
+    "rsi_short_score": 0.006310661789029837,
+    "early_trix_bullish": 0.0052390918135643005,
+    "volume_passed": 0.0049579814076423645,
+    "macd_4h_short_type": 0.0
+  },
+  "top_symbols_tp3_plus": [
+    [
+      "ETHUSDT",
+      8
+    ],
+    [
+      "CAKEUSDT",
+      8
+    ],
+    [
+      "LDOUSDT",
+      7
+    ],
+    [
+      "APTUSDT",
+      7
+    ],
+    [
+      "FARTCOINUSDT",
+      6
+    ],
+    [
+      "KASUSDT",
+      6
+    ],
+    [
+      "RAYSOLUSDT",
+      6
+    ],
+    [
+      "DOGEUSDT",
+      5
+    ],
+    [
+      "CRVUSDT",
+      5
+    ],
+    [
+      "SPXUSDT",
+      5
+    ],
+    [
+      "BTCUSDT",
+      5
+    ],
+    [
+      "PUMPUSDT",
+      5
+    ],
+    [
+      "TRBUSDT",
+      5
+    ],
+    [
+      "STXUSDT",
+      5
+    ],
+    [
+      "MORPHOUSDT",
+      5
+    ],
+    [
+      "USELESSUSDT",
+      5
+    ],
+    [
+      "IOTAUSDT",
+      5
+    ],
+    [
+      "PENDLEUSDT",
+      5
+    ],
+    [
+      "ETHFIUSDT",
+      5
+    ],
+    [
+      "POPCATUSDT",
+      4
+    ],
+    [
+      "ADAUSDT",
+      4
+    ],
+    [
+      "MOODENGUSDT",
+      4
+    ],
+    [
+      "LTCUSDT",
+      4
+    ],
+    [
+      "XRPUSDT",
+      4
+    ],
+    [
+      "KERNELUSDT",
+      4
+    ],
+    [
+      "1INCHUSDT",
+      4
+    ],
+    [
+      "EIGENUSDT",
+      4
+    ],
+    [
+      "ALGOUSDT",
+      4
+    ],
+    [
+      "ETCUSDT",
+      4
+    ],
+    [
+      "GRTUSDT",
+      4
+    ],
+    [
+      "ARCUSDT",
+      4
+    ],
+    [
+      "PENGUUSDT",
+      4
+    ],
+    [
+      "DOTUSDT",
+      4
+    ],
+    [
+      "RENDERUSDT",
+      4
+    ],
+    [
+      "SEIUSDT",
+      4
+    ],
+    [
+      "ZROUSDT",
+      4
+    ],
+    [
+      "XPLUSDT",
+      4
+    ],
+    [
+      "FETUSDT",
+      4
+    ],
+    [
+      "SUSDT",
+      3
+    ],
+    [
+      "NEARUSDT",
+      3
+    ],
+    [
+      "SNXUSDT",
+      3
+    ],
+    [
+      "MOCAUSDT",
+      3
+    ],
+    [
+      "KAITOUSDT",
+      3
+    ],
+    [
+      "AAVEUSDT",
+      3
+    ],
+    [
+      "AI16ZUSDT",
+      3
+    ],
+    [
+      "NEIROUSDT",
+      3
+    ],
+    [
+      "GUNUSDT",
+      3
+    ],
+    [
+      "SUIUSDT",
+      3
+    ],
+    [
+      "AVAXUSDT",
+      3
+    ],
+    [
+      "DEGENUSDT",
+      3
+    ],
+    [
+      "OPUSDT",
+      3
+    ],
+    [
+      "JUPUSDT",
+      3
+    ],
+    [
+      "POLUSDT",
+      3
+    ],
+    [
+      "GRIFFAINUSDT",
+      3
+    ],
+    [
+      "BANDUSDT",
+      3
+    ],
+    [
+      "TAOUSDT",
+      3
+    ],
+    [
+      "JTOUSDT",
+      3
+    ],
+    [
+      "VIRTUALUSDT",
+      3
+    ],
+    [
+      "MANTAUSDT",
+      3
+    ],
+    [
+      "METISUSDT",
+      3
+    ],
+    [
+      "PNUTUSDT",
+      3
+    ],
+    [
+      "1000PEPEUSDT",
+      3
+    ],
+    [
+      "UNIUSDT",
+      3
+    ],
+    [
+      "BIOUSDT",
+      3
+    ],
+    [
+      "GASUSDT",
+      3
+    ],
+    [
+      "ICPUSDT",
+      3
+    ],
+    [
+      "ENAUSDT",
+      3
+    ],
+    [
+      "AVAAIUSDT",
+      3
+    ],
+    [
+      "INJUSDT",
+      3
+    ],
+    [
+      "AXLUSDT",
+      3
+    ],
+    [
+      "USUALUSDT",
+      3
+    ],
+    [
+      "GMXUSDT",
+      3
+    ],
+    [
+      "KAIAUSDT",
+      3
+    ],
+    [
+      "GMTUSDT",
+      3
+    ],
+    [
+      "TONUSDT",
+      2
+    ],
+    [
+      "PEOPLEUSDT",
+      2
+    ],
+    [
+      "WIFUSDT",
+      2
+    ],
+    [
+      "HAEDALUSDT",
+      2
+    ],
+    [
+      "APEUSDT",
+      2
+    ],
+    [
+      "GHSTUSDT",
+      2
+    ],
+    [
+      "TIAUSDT",
+      2
+    ],
+    [
+      "XMRUSDT",
+      2
+    ],
+    [
+      "ONDOUSDT",
+      2
+    ],
+    [
+      "ENSUSDT",
+      2
+    ],
+    [
+      "SOLUSDT",
+      2
+    ],
+    [
+      "CHILLGUYUSDT",
+      2
+    ],
+    [
+      "XLMUSDT",
+      2
+    ],
+    [
+      "HYPEUSDT",
+      2
+    ],
+    [
+      "HUMAUSDT",
+      2
+    ],
+    [
+      "KAVAUSDT",
+      2
+    ],
+    [
+      "REZUSDT",
+      2
+    ],
+    [
+      "SKLUSDT",
+      2
+    ],
+    [
+      "PLUMEUSDT",
+      2
+    ],
+    [
+      "XANUSDT",
+      2
+    ],
+    [
+      "AEVOUSDT",
+      2
+    ],
+    [
+      "ALTUSDT",
+      2
+    ],
+    [
+      "VANAUSDT",
+      2
+    ]
+  ]
+}

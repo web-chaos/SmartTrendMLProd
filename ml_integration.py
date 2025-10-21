@@ -8,8 +8,10 @@ import joblib, json, os
 ML_CONFIG = {
     "enabled": True,
     "mode": "advisory",  # off | advisory | hybrid | autonomous
-    "model_path": "models/lgbm_v1.pkl",
-    "features_path": "models/feature_order.json",
+    "model_path": "models/xgb_v1.pkl",
+    "features_path": "models/feature_order_xgb.json",
+    # "model_path": "models/lgbm_v1.pkl",
+    # "features_path": "models/feature_order.json",
     "confidence_threshold": 0.6,  # порог минимальной уверенности для принятия активного решения
     "hybrid_override_threshold": 0.7,  # порог для переубедить бота
 }
@@ -275,11 +277,11 @@ def generate_signal_text(
     stop: float,
     entry_zone_min: Optional[float] = None,
     entry_zone_max: Optional[float] = None
-) -> str:
+) -> tuple[str, bool]:
     # --- 1. Вход и сила ---
     final_score = filters_results.get("final_score", 0)
     ml_conf = ml_output.get("ml_result", {}).get("ml_confidence", 0)
-    strength = round((0.6 * final_score + 0.4 * ml_conf) * 100, 2)
+    strength = round((0.6 * final_score + 0.4 * ml_conf) * 100, 2) #TODO: доработать доверия весов, возможно автоматизировать. 
 
     # Словесное описание силы
     signal_type = filters_results.get("trend_global", "long")  # long / short
@@ -323,23 +325,49 @@ def generate_signal_text(
             tps_text = "Цели не определены"
 
     # --- 4. ML прогноз ---
-    ml_action = ml_output.get("ml_action", "neutral")
+    # ml_action = ml_output.get("ml_action", "neutral")
+    # ml_conf_pct = round(ml_conf * 100, 1)
+    # if ml_action == "approve":
+    #     ml_text = f"вход возможен (уверенность <code>{ml_conf_pct}%</code>)"
+    # elif ml_action == "reject":
+    #     ml_text = f"сигнал отклонён (уверенность <code>{ml_conf_pct}%</code>)"
+    # else:
+    #     ml_text = f"нейтральный (уверенность <code>{ml_conf_pct}%</code>)"
+
+    ml_class = ml_output.get("ml_result", {}).get("ml_predicted_class", 0)
     ml_conf_pct = round(ml_conf * 100, 1)
-    if ml_action == "approve":
-        ml_text = f"вход возможен (уверенность <code>{ml_conf_pct}%</code>)"
-    elif ml_action == "reject":
-        ml_text = f"сигнал отклонён (уверенность <code>{ml_conf_pct}%</code>)"
+    ml_action = ml_output.get("ml_action", "neutral")
+
+    # определяем текст класса
+    if ml_class == 0:
+        class_text = "STOP"
+    elif ml_class == 1:
+        class_text = "TP1"
     else:
-        ml_text = f"нейтральный (уверенность <code>{ml_conf_pct}%</code>)"
+        class_text = f"TP{ml_class}+"
+
+    # выбираем иконку по действию / силе
+    if ml_action == "approve":
+        emoji = "🟢"
+    elif ml_action == "reject":
+        emoji = "🔴"
+    else:
+        emoji = "⚪"
+
+    # формируем компактный текст
+    ml_text = f"{emoji} {ml_conf_pct}% {class_text}"
+
 
     # --- 5. Рекомендация ---
+    ema_wait = False 
     if ml_class == 0 or ml_action == "reject":
-        rec = "отклонён"
+        rec = "Сигнал отклонён"
     elif ml_action == "approve":
-        rec = "вход после подтверждения"
+        rec = "Вход после подтверждения"
     else:
         if strength < 60 and ema_fast_ltf is not None:
             rec = f"Ждать подтверждения EMA (<code>{ema_fast_ltf:.4f}</code>)"
+            ema_wait = True
         else:
             rec = "Ждать подтверждения на графике"
 
@@ -354,7 +382,7 @@ def generate_signal_text(
         f"✅ {rec}"
     )
 
-    return message
+    return message, ema_wait
 
 
 # HYBRID режим:
